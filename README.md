@@ -1,7 +1,10 @@
-ZahlenMauer
+Zahlenmauer
 ===========
 Mit Hilfe dieser Webanwendung lassen sich beliebige 
-Zahlenmauern erstellen.
+Zahlenmauern innerhalb eines Webbrowser darstellen. 
+
+Der folgende Link führt zu einer konfigurierbaren Zahlenmauer:
+[Demonstration Zahlenmauer](http://htmlpreview.github.com/?https://github.com/mgje/ZahlenMauer/blob/master/public/zahlenmauer.html)
 
 Um erste Erfahrungen zu [CoffeeScript](http://coffeescript.org/) (sehr 
 effiziente Sprache für JavaScript Programmierung) zu sammeln, erstellte 
