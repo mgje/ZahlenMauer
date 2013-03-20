@@ -23,7 +23,7 @@ Um eigene Änderungen einzubringen, sollte die Datei [zahlenmauer.coffee](src/za
 im Ordner src entsprechend angepasst werden. 
 
 Das kompakte und übersichtliche CoffeeScript Programm[zahlenmauer.coffee](src/zahlenmauer.coffee)
-wird in ein korrektes, jedoch schwieriger lesbares JavaScript Programm [zahlenmauer.js](public/js/zahlenmauer.coffee) 
+wird in ein korrektes, jedoch schwieriger lesbares JavaScript Programm [zahlenmauer.js](public/js/zahlenmauer.js) 
 übersetzt. 
 
 Weitere Informationen zum Arbeiten mit CoffeeScript finden sich unter:
