@@ -1,0 +1,31 @@
+div.table{
+	display: table;}
+
+div.mauer { 
+	display:table-row;
+    width:auto;
+	border: 0px; 
+	background-color:#ffffcc; 
+	padding:0px 0px; 
+	margin-left:0px; }
+
+div.block{ 
+	float:left;
+    display:table-cell;
+	text-align:center;
+	color:#006400; 
+	width:60px;
+	padding:5px;
+	border:5px solid gray;
+	margin:0px;}
+
+div.leer{
+	float:left;
+    display:table-cell;
+	text-align:center;
+	color:ffffff; 
+	width:30px;
+	padding:0px;
+	border:0px;
+	margin:0px;}
+}	
