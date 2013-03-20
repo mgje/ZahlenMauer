@@ -1,5 +1,5 @@
 deleteZahlenmauer = ->
-	zmE = document.getElementById('zahlenmauer')
+	zmE = document.getElementById 'zahlenmauer'
 	while zmE.hasChildNodes()
 		zmE.removeChild zmE.lastChild
 
