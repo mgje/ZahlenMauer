@@ -16,19 +16,20 @@ nextLayer = (l,offset=0) ->
 	zmE = document.getElementById 'zahlenmauer'
 	children = zmE.children
 	if children.length == 0
-    	zmE.appendChild tE 
-    else
-    	zmE.insertBefore tE,children[0]	
-    # für alle Zahlen in der Liste DIV Elemente erzeugen und Werte eintragen
+		zmE.appendChild tE
+	else
+		zmE.insertBefore tE,children[0]	
+ 
+    # Für alle Zahlen in der Liste DIV Elemente erzeugen und Werte eintragen
 	for z in l 
 		cE = document.createElement 'div' 
 		cE.className = 'block'
 		cE.appendChild document.createTextNode(z)
 		mE.appendChild cE 
 
+# Zeichne die erste Schicht und erzeuge die oberen Schichten
 genZahlenmauer = (zm) ->
 	offset = 0
-	# Unterste Schicht
 	nextLayer zm,offset 
 
 	while zm.length >= 2
@@ -39,6 +40,7 @@ genZahlenmauer = (zm) ->
 		zm = tmp
 		nextLayer zm,offset
 
+# Ausertung des Formularfeldes
 evaluateInput = (form) ->
 	input = form.input1.value
 	zm = []	
