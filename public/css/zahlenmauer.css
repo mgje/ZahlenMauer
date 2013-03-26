@@ -1,5 +1,6 @@
 div.table{
-	display: table;}
+	margin-bottom: 0px;
+}
 
 div.mauer { 
 	display:table-row;

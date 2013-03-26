@@ -1,3 +1,6 @@
+# Globale Variable für die Zahlenmauer
+gzm = []
+
 deleteZahlenmauer = ->
 	zmE = document.getElementById 'zahlenmauer'
 	while zmE.hasChildNodes()
@@ -26,10 +29,41 @@ nextLayer = (l,offset=0) ->
 		cE.appendChild document.createTextNode(z)
 		mE.appendChild cE 
 
-genZahlenmauer = (zm) ->
+makeButtonGroup = (i,operator) ->
+	bE = document.createElement 'button'
+	bE.className = 'btn'
+	bE.setAttribute 'nr',i 
+	bE.setAttribute 'op',operator
+
+	iE = document.createElement 'i'
+	if operator == 'inc'
+		iE.className = 'icon-plus-sign'
+	
+	if operator == 'dec'
+		iE.className = 'icon-minus-sign'
+
+	bE.appendChild iE
+	bE
+
+genButtons = (zm) ->
+	divE = document.getElementById 'button-zahlen'
+	while divE.hasChildNodes()
+		divE.removeChild divE.lastChild
+
+	i = 0
+	for z in zm
+		divE.appendChild makeButtonGroup i,'inc'
+		divE.appendChild makeButtonGroup i,'dec'
+		i = i + 1
+
+genZahlenmauer = ->
 	offset = 0
+	zm = gzm
 	# Unterste Schicht
 	nextLayer zm,offset 
+
+	# Erzeugung der Buttons
+	genButtons zm
 
 	while zm.length >= 2
 		offset += 40
@@ -45,8 +79,9 @@ evaluateInput = (form) ->
 	for z in input.split ',' 
 		zm.push parseInt z
 
+	gzm = zm
 	deleteZahlenmauer()
-	genZahlenmauer zm 
+	genZahlenmauer()
 
 # Der folgende Teil wird einmal, nach dem Laden der Seite ausgeführt
 form = document.forms[0]
@@ -62,6 +97,27 @@ document.forms[0].onkeypress = (e) ->
 bt = document.forms[0].button
 bt.onclick = (e) ->
  	evaluateInput form	
+ 	false
+
+# Listener increase / decrease
+divE = document.getElementById 'button-zahlen'
+divE.onclick = (e) ->
+	if e.target.className.indexOf('icon') == 0 
+		bE = e.target.parentElement
+	else
+		bE = e.target
+	
+	op = bE.getAttribute 'op'
+	nr = parseInt bE.getAttribute 'nr'
+	
+	if op == 'inc'
+		gzm[nr] += 1
+	else
+		gzm[nr] -= 1
+
+	deleteZahlenmauer()
+	genZahlenmauer()
+
 
 # Darstellung Default Mauer
 evaluateInput form	
