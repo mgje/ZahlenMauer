@@ -3,11 +3,15 @@
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/zahlenmauer.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <link href="stylesheets/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/zahlenmauer.css" media="screen" />
+
+    
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -38,15 +42,16 @@
 Weitere Zahlen getrennt durch Kommas eingeben und den Rebuild-Knopf drücken
 </p>
 <p>
-<form action="" method="GET">
-      <input type="text" name="input1" size="80" value="2,3,4,5,6,7" >
-      <input type="button" name="button" value="Rebuild">
-</form> 
+    <form    class="form-search" action="" method="GET">
+      <input type="text" name="input1" class="input-xlarge" type="text" value="1,2,3,4,5,6,7" >
+      <button type="submit" name="button" class="btn" ><i class="icon-chevron-right"></i> Rebuild </button>
+    </form> 
 </p>
 <p></p>
 <p></p>
 
 <div id="zahlenmauer"></div>
+<div id="button-zahlen"></div>
 <p></p>
 <p></p>
 <p>
