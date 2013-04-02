@@ -30,3 +30,6 @@ div.leer{
 	border:0px;
 	margin:0px;}
 }	
+div.invisible{
+	display:none;
+}

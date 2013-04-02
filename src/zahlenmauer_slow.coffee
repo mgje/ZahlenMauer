@@ -1,58 +1,34 @@
 # Globale Variable für die Zahlenmauer
 gzm = []
-btGroup = []
-blGroup = {}
-zmE = {}
-lMauer = 0
 
 deleteZahlenmauer = ->
-	if lMauer > gzm.length
-		for i in [0..lMauer-gzm.length-1]
-			zmE.removeChild zmE.lastChild
+	zmE = document.getElementById 'zahlenmauer'
+	while zmE.hasChildNodes()
+		zmE.removeChild zmE.lastChild
 
 # Zeichne eine Schicht der Zahlenmauer
 nextLayer = (l,offset=0) -> 
 	# HTML Elemente erzeugen (jede Zeile als div Tabelle)
-	pos = l.length
-	if typeof(blGroup[pos])=='undefined'
-		tE = document.createElement 'div'
-		tE.className = 'table'
-		tE.style.position = 'relative'
-		tE.style.left = offset+'px'
-		mE = document.createElement 'div'
-		mE.className = 'mauer'
-		tE.appendChild mE
- 
-    	# Für alle Zahlen in der Liste DIV Elemente erzeugen und Werte eintragen
-		for z in l 
-			cE = document.createElement 'div' 
-			cE.className = 'block'
-			cE.appendChild document.createTextNode(z)
-			mE.appendChild cE
-		blGroup[pos] = tE
-		children = zmE.children
-		if children.length == lMauer
-			zmE.appendChild tE
-		else
-			zmE.insertBefore tE,children[lMauer]	 
+	tE = document.createElement 'div'
+	tE.className = 'table'
+	tE.style.position = 'relative'
+	tE.style.left = offset+'px'	
+	mE = document.createElement 'div'
+	mE.className = 'mauer'
+	tE.appendChild mE 
+	zmE = document.getElementById 'zahlenmauer'
+	children = zmE.children
+	if children.length == 0
+		zmE.appendChild tE
 	else
-		# Für alle Zahlen in der Liste Werte aendern
-		tE = blGroup[pos]
-		# Position der Mauer berechnen
-		tE.style.left = 40*(gzm.length-pos)+'px'
-		i = 0
-		# Falls neue Mauern dazu kommen
-		if lMauer < l.length
-			# Erster Block ?
-			if l.length == gzm.length
-				zmE.appendChild tE
-			else
-				zmE.insertBefore tE,blGroup[pos+1]
-
-		for z in l 
-            tE.children[0].children[i].lastChild.data= z.toString()
-            i = i + 1
-    'done'
+		zmE.insertBefore tE,children[0]	
+ 
+    # Für alle Zahlen in der Liste DIV Elemente erzeugen und Werte eintragen
+	for z in l 
+		cE = document.createElement 'div' 
+		cE.className = 'block'
+		cE.appendChild document.createTextNode(z)
+		mE.appendChild cE 
 
 makeButtonGroup = (i,operator) ->
 	bE = document.createElement 'button'
@@ -70,40 +46,34 @@ makeButtonGroup = (i,operator) ->
 	bE.appendChild iE
 	bE
 
-genButtons = () ->
+genButtons = (zm) ->
 	divE = document.getElementById 'button-zahlen'
 	while divE.hasChildNodes()
 		divE.removeChild divE.lastChild
-    
+
 	i = 0
-	for z in gzm
-    	# Elemente nur einmal erzeugen
-    	if typeof (btGroup[i])=='undefined'
-    		btGroup[i]=[]
-    		btGroup[i]['inc']= makeButtonGroup i,'inc'
-    		btGroup[i]['dec']= makeButtonGroup i,'dec'
-    	divE.appendChild btGroup[i]['inc']
-    	divE.appendChild btGroup[i]['dec']
-    	i = i + 1
+	for z in zm
+		divE.appendChild makeButtonGroup i,'inc'
+		divE.appendChild makeButtonGroup i,'dec'
+		i = i + 1
 
 genZahlenmauer = ->
 	offset = 0
+	zm = gzm
 	# Unterste Schicht
-	nextLayer gzm,offset 
+
+	nextLayer zm,offset 
 
 	# Erzeugung der Buttons
-	genButtons()
+	genButtons zm
 
-	zm = gzm
 	while zm.length >= 2
 		offset += 40
 		tmp = []
 		for i in [0..zm.length-2]
 			tmp[i]=zm[i]+zm[i+1]
-		nextLayer tmp,offset
 		zm = tmp
-	lMauer = gzm.length	
-		
+		nextLayer zm,offset
 
 # Ausertung des Formularfeldes
 evaluateInput = (form) ->
@@ -118,7 +88,6 @@ evaluateInput = (form) ->
 
 # Der folgende Teil wird einmal, nach dem Laden der Seite ausgeführt
 form = document.forms[0]
-zmE = document.getElementById 'zahlenmauer'
 # Events an Formular binden 
 # Enter
 document.forms[0].onkeypress = (e) ->
